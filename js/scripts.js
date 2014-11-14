@@ -29537,7 +29537,8 @@ module.exports = warning;
 
     smoothScroll.init({
 	speed: 500,
-	easing: 'ease-in-out-cubic'
+	easing: 'ease-in-out-cubic',
+	updateURL: false
     });
 
     // Object responsible for acquiring data from API
