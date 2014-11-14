@@ -1,6 +1,11 @@
 (function($) {
 
-    // 
+    smoothScroll.init({
+	speed: 500,
+	easing: 'ease-in-out-cubic'
+    });
+
+    // Object responsible for acquiring data from API
     function CitySearch(city) {
 
 	var forecast = {};
@@ -303,7 +308,6 @@
 	    var deferred = $.Deferred();
 	    if (Object.keys(forecast).length > 0) {
 		deferred.resolve(forecast);
-		console.log('cached copy');
 		return deferred.promise();
 	    }		
 	    var url = 'http://api.openweathermap.org/data/2.5/forecast/daily?q=' + city + '&units=metric&mode=json';
@@ -325,7 +329,7 @@
 			forecast.weather.forEach(function(day) {
 			    sumPressure += day.pressure;
 			})
-			forecast.averagePressure = sumPressure / forecast.weather.length;
+			forecast.averagePressure = Math.round(sumPressure / forecast.weather.length);
 			deferred.resolve(forecast);
 		    } else {
 			deferred.reject();
@@ -449,6 +453,15 @@
 	}
     }));
     var ResultsBox = React.createFactory(React.createClass({
+	scrollToWeather: function() {
+	    smoothScroll.animateScroll(null, '#weatherbox');
+	},
+	componentDidMount: function() {
+	    this.scrollToWeather();
+	},
+	componentDidUpdate: function() {
+	    this.scrollToWeather();
+	},
 	createNodes: function() {
 	    return this.props.forecast.weather.map(function(day) {
 		return WeatherNode({weather: day})
@@ -466,10 +479,14 @@
 				    );
 	    }
 	    return React.DOM.div({className: 'results'},
-				 React.DOM.div({className: 'weatherbox clearfix'},
+				 React.DOM.div({className: 'weatherbox clearfix',
+						id: 'weatherbox'},
 					       React.DOM.h2({className: 'weather-heading'},
 							    '7-day forecast for ' + this.props.forecast.city + ', ' + this.props.forecast.country
 							   ),
+					       React.DOM.p({className: 'pressure'},
+							   'The average air pressure for this week is expected to be ' + this.props.forecast.averagePressure + 'kPa.'
+							  ),
 					       this.createNodes()
 					      )
 				);
