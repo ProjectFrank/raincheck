@@ -1,0 +1,84 @@
+@require "normalize.styl"
+
+blue = #22a7f0
+
+*
+  box-sizing border-box
+
+html
+  font-size 62.5%
+
+body
+  font-family "Open Sans"
+  background-color blue
+  font-size 1.6rem
+  color #fff
+
+/*
+ * Clearfix: contain floats
+ *
+ * For modern browsers
+ * 1. The space content is one way to avoid an Opera bug when the
+ *    `contenteditable` attribute is included anywhere else in the document.
+ *    Otherwise it causes space to appear at the top and bottom of elements
+ *    that receive the `clearfix` class.
+ * 2. The use of `table` rather than `block` is only necessary if using
+ *    `:before` to contain the top-margins of child elements.
+ */
+
+.clearfix:before
+.clearfix:after 
+  content: " " /* 1 */
+  display: table /* 2 */
+
+
+.clearfix:after 
+  clear: both
+
+a
+  text-decoration none
+  color inherit
+
+img
+  max-width 100%
+  height auto
+
+input[type=text]
+  display block
+  margin 2rem auto
+  background blue
+  border 0.5rem solid #fff
+  padding 1rem
+  &:focus
+    outline none
+
+input[type=submit]
+  background blue
+  border 0.5rem solid #fff
+
+placeholder
+  color: #fff
+
+svg
+  width 100%
+  fill #fff
+
+form
+  text-align center
+
+label
+  display block
+  font-size 4rem
+  font-weight 700
+  padding 5rem 0
+
+.weather-heading
+  text-align center
+
+.daily-forecast
+  width 14.25%
+  float left
+  text-align center
+
+.day
+  display block
