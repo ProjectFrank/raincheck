@@ -290,8 +290,8 @@
 	    result.day = prettyDay(result.date.getDay());
 	    result.month = prettyMonth(result.date.getMonth());
 	    result.dayOfMonth = result.date.getDate();
-	    result.high = Math.round(data.temp.min);
-	    result.low = Math.round(data.temp.max);
+	    result.high = Math.round(data.temp.max);
+	    result.low = Math.round(data.temp.min);
 	    result.pressure = Math.round(data.pressure);
 	    result.weather = data.weather;
 	    return result;
