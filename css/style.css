@@ -246,6 +246,9 @@ svg {
   width: 100%;
   fill: #fff;
 }
+.searchbox {
+  padding-bottom: 6.5rem;
+}
 form {
   text-align: center;
 }
