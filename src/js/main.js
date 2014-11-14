@@ -1,11 +1,5 @@
 (function($) {
 
-    smoothScroll.init({
-	speed: 500,
-	easing: 'ease-in-out-cubic',
-	updateURL: false
-    });
-
     // Object responsible for acquiring data from API
     function CitySearch(city) {
 
@@ -455,7 +449,7 @@
     }));
     var ResultsBox = React.createFactory(React.createClass({
 	scrollToWeather: function() {
-	    smoothScroll.animateScroll(null, '#weatherbox');
+	    smoothScroll.animateScroll(null, '#weatherbox', {updateURL: false});
 	},
 	componentDidMount: function() {
 	    this.scrollToWeather();
@@ -471,7 +465,8 @@
 	render: function() {
 	    if (this.props.forecast === null) {
 		return React.DOM.div({className: 'results'},
-				     React.DOM.div({className: 'errorbox'},
+				     React.DOM.div({className: 'weatherbox',
+						    id: 'weatherbox'},
 						   React.DOM.h2({className: 'error'},
 								React.DOM.i({className: 'fa fa-close'}),
 								' "' + this.props.input + '" was not found. Try using a different query.'
@@ -480,7 +475,7 @@
 				    );
 	    }
 	    return React.DOM.div({className: 'results'},
-				 React.DOM.div({className: 'weatherbox clearfix',
+				 React.DOM.div({className: 'weatherbox',
 						id: 'weatherbox'},
 					       React.DOM.h2({className: 'weather-heading'},
 							    '7-day forecast for ' + this.props.forecast.city + ', ' + this.props.forecast.country
