@@ -72,10 +72,8 @@
 	// for better API compatibility
 	if (/, United States$/.test(city)) {
 	    city = city.replace(/\s([A-Z]{2}),\s/, function(match, p1) {
-		console.log(p1);
 		return ' ' + states[p1] + ', ';
 	    });
-	    console.log(city);
 	}
 
 
