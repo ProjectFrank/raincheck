@@ -76,7 +76,6 @@
 	    });
 	}
 
-
 	var forecast = {};
 
 	// Return string representing day of the week where
@@ -568,6 +567,18 @@
 	getInitialState: function() {
 	    return {forecast: undefined};
 	},
+	componentWillMount: function() {
+	    var queryStringTest = /\?q=/;
+	    var url = document.URL;
+	    if (queryStringTest.test(url)) {
+		var query = decodeURI(url.slice(url.search(queryStringTest) + 3));
+		getSearch(query).search().then(function(forecast) {
+		    this.setState({forecast: forecast});
+		}.bind(this), function() {
+		    this.setState({forecast: null});
+		}.bind(this));
+	    }
+	},
 	input: undefined,
 	handleSubmit: function(e) {
 	    e.preventDefault();
@@ -581,6 +592,15 @@
 	    }.bind(this), function() {
 		this.setState({forecast: null});
 	    }.bind(this));
+	},
+	componentDidUpdate: function() {
+	    // Update URL only if component updated via user input 
+	    if (this.input) {
+		window.history.pushState({},'', '?q=' + encodeURI(this.input));
+	    }
+	    if (this.state.forecast) {
+		document.title = this.state.forecast.city + ' - Rain Check!';
+	    }
 	},
 	render: function() {
 	    if (this.state.forecast === undefined) {
