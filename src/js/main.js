@@ -19,7 +19,7 @@
                 return result;
             };
         })();
-    }    
+    }
 
     // Object.keys shim
     if (!Object.keys) Object.keys = function(o) {
@@ -31,7 +31,7 @@
     }
 
     
-    var protoMaker = function() {
+    var searchProto = (function() {
         // Object of US states with two-letter abbreviations as keys
         // Used for converting abbreviation to full state name
         var states = {
@@ -400,9 +400,7 @@
             getCountryName: getCountryName,
             getStateName: getStateName
         }
-    }
-
-    var searchProto = protoMaker();
+    })();
     
     // Object responsible for acquiring data from API
     function CitySearch(city) {
