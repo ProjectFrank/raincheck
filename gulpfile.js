@@ -12,6 +12,12 @@ gulp.task('default', function() {
     gulp.start('serve');
 });
 
+gulp.task('build', function() {
+    gulp.start('stylus');
+    gulp.start('jade');
+    gulp.start('scripts');
+})
+
 gulp.task('stylus', function() {
     return gulp.src('src/styles/style.styl')
 	.pipe(stylus())
