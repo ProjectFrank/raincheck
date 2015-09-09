@@ -1,3 +1,7 @@
-# test:
-#   override:
-#     - node node_modules/gulp/bin/gulp.js build
+machine:
+  node:
+    version: stable
+
+test:
+  override:
+    - node node_modules/gulp/bin/gulp.js build
